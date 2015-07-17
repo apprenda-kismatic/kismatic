@@ -15,8 +15,51 @@
 // Package kismatic contains common functions for Kismatic clusters.
 package main
 
-import "fmt"
+import (
+	"github.com/codegangsta/cli"
+	"github.com/kismatic/kismatic/plugin"
+	"os"
+)
 
 func main() {
-  fmt.Printf("Coming soon!\n")
+	app := cli.NewApp()
+	app.Name = "kismatic"
+	app.Usage = "Install and manage Kismatic plugins for your Kubernetes cluster"
+	app.Action = func(c *cli.Context) {
+		// run help
+		println("Run 'kismatic help' for help")
+	}
+
+	app.Commands = []cli.Command{
+		{
+			Name:    "plugin",
+			Aliases: []string{"plugins"},
+			Usage:   "Installs and manages Kismatic plugins",
+			Subcommands: []cli.Command{
+				{
+					Name:  "install",
+					Usage: "installs a Kismatc plugin",
+					Flags: []cli.Flag{
+						cli.StringFlag{
+							Name:  "version",
+							Value: "",
+							Usage: "plugin version to install",
+						},
+					},
+					Action: func(c *cli.Context) {
+						plugin.Install(c)
+					},
+				},
+				{
+					Name:  "license",
+					Usage: "licenses a Kismatc plugin",
+					Action: func(c *cli.Context) {
+						plugin.License(c)
+					},
+				},
+			},
+		},
+	}
+
+	app.Run(os.Args)
 }

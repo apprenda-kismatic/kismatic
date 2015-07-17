@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/kismatic/kismatic",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-122-g8cbee4b",
+			"Rev": "8cbee4b7192cea690c9f048e742e6b4c3525fd9e"
+		},
+		{
+			"ImportPath": "github.com/google/go-github/github",
+			"Rev": "34fb8ee07214d23c3035c95691fe9069705814d6"
+		},
+		{
+			"ImportPath": "github.com/google/go-querystring/query",
+			"Rev": "547ef5ac979778feb2f760cdb5f4eae1a2207b86"
+		}
+	]
+}
