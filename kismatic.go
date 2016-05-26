@@ -16,9 +16,10 @@
 package main
 
 import (
+	"os"
+
 	"github.com/codegangsta/cli"
 	"github.com/kismatic/kismatic/plugin"
-	"os"
 )
 
 func main() {
@@ -28,6 +29,15 @@ func main() {
 	app.Action = func(c *cli.Context) {
 		// run help
 		println("Run 'kismatic help' for help")
+	}
+
+	// Global flags
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "configuration, c",
+			Value: "",
+			Usage: "path to config file",
+		},
 	}
 
 	app.Commands = []cli.Command{
@@ -57,6 +67,25 @@ func main() {
 						plugin.License(c)
 					},
 				},
+			},
+		},
+		{
+			Name:  "login",
+			Usage: "Login",
+			Flags: []cli.Flag{
+				cli.StringFlag{
+					Name:  "username, u",
+					Value: "",
+					Usage: "Username for authenticating",
+				},
+				cli.StringFlag{
+					Name:  "password, p",
+					Value: "",
+					Usage: "Password for authenticating",
+				},
+			},
+			Action: func(c *cli.Context) {
+				plugin.Login(c)
 			},
 		},
 	}
